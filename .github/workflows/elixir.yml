@@ -14,6 +14,18 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: postgres:11
+        ports: ["5432:5432"]
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v2
       - name: Set up Elixir
@@ -39,7 +51,7 @@ jobs:
         run: mix compile --warnings-as-errors
 
       - name: Run credo
-        run: mix credo --strict
+        run: mix credo
 
       - name: Retrieve PLT cache
         uses: actions/cache@v1
