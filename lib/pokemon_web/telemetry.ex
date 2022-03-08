@@ -1,4 +1,7 @@
 defmodule PokemonWeb.Telemetry do
+  @moduledoc """
+  This module provides a simple telemetry system for Pokemon Web.
+  """
   use Supervisor
   import Telemetry.Metrics
 

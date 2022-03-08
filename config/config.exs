@@ -7,6 +7,12 @@
 # General application configuration
 import Config
 
+config :pokemon, Pokemon.Repo,
+  database: "pokemon_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost"
+
 config :pokemon,
   ecto_repos: [Pokemon.Repo]
 
