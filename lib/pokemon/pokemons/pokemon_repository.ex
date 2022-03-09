@@ -11,7 +11,7 @@ defmodule Pokemon.Pokemons.PokemonRepository do
     end
   end
 
-  @spec get_id_by_name(name :: String.t()) :: String.t() | {:error, atom}
+  @spec get_id_by_name(name :: String.t()) :: integer | {:error, atom}
   def get_id_by_name(name) do
     case impl().get_by_name(name) do
       {:ok, %{"id" => id}} -> id
