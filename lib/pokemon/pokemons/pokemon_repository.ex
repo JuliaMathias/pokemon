@@ -19,5 +19,5 @@ defmodule Pokemon.Pokemons.PokemonRepository do
     end
   end
 
-  defp impl, do: Application.get_env(:pokemon, __MODULE__, Pokemon.Http.Client)
+  defp impl, do: Application.get_env(:pokemon, __MODULE__, Pokemon.PokeApi.Client)
 end

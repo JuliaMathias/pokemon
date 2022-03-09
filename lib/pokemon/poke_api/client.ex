@@ -1,4 +1,4 @@
-defmodule Pokemon.Http.Client do
+defmodule Pokemon.PokeApi.Client do
   @moduledoc """
   Client for the Pokemon API.
   """
@@ -8,7 +8,7 @@ defmodule Pokemon.Http.Client do
   plug Tesla.Middleware.BaseUrl, "https://pokeapi.co/api/v2/pokemon/"
   plug Tesla.Middleware.JSON
 
-  @behaviour Pokemon.Http.Behaviour
+  @behaviour Pokemon.PokeApi.Behaviour
 
   # Here I wondered if I shouldn't just do one generalist function that requested by both name or ID
   # but I feel like doing it this way would be less confusing.

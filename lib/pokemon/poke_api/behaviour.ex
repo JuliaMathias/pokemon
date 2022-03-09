@@ -1,4 +1,4 @@
-defmodule Pokemon.Http.Behaviour do
+defmodule Pokemon.PokeApi.Behaviour do
   @moduledoc """
   Behaviour for Pokemon Api Client
   """
