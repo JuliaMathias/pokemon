@@ -20,10 +20,12 @@ defmodule PokemonWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", PokemonWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", PokemonWeb do
+    pipe_through :api
+
+    get "/name/:pokeapi_id", PocketMonsterController, :name
+    get "/pokeapi_id/:name", PocketMonsterController, :pokeapi_id
+  end
 
   # Enables LiveDashboard only for development
   #
