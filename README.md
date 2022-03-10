@@ -2,6 +2,10 @@
 
 &nbsp;
 
+Welcome to Pokemon! 😊 This is a simple Phoenix project that specific data from the [Poke API](<https://pokeapi.co/>) and displays it through REST endpoints. The project also saves the full information it got from the Poke API in a database, making a sort of cache.
+
+&nbsp;
+
 ## Running the Project
 
   1. Install dependencies
