@@ -2,14 +2,11 @@ defmodule Pokemon.PocketMonsters.PocketMonster do
   @moduledoc """
   This module defines the schema for PocketMonsters.
   """
+
   use Ecto.Schema
   import Ecto.Changeset
 
-  @type t :: %__MODULE__{}
-
   @primary_key {:id, Ecto.UUID, autogenerate: true}
-
-  @derive {Jason.Encoder, except: [:__meta__]}
 
   schema "pocket_monsters" do
     field :name, :string
