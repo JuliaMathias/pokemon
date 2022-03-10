@@ -18,9 +18,4 @@ defmodule PokemonWeb.PocketMonsterController do
       render(conn, "pokeapi_id.json", pocket_monster_pokeapi_id: pocket_monster_pokeapi_id)
     end
   end
-
-  # def show(conn, %{"id" => id}) do
-  #   pocket_monster = PocketMonsters.get_pocket_monster!(id)
-  #   render(conn, "show.json", pocket_monster: pocket_monster)
-  # end
 end
