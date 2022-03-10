@@ -1,4 +1,7 @@
 defmodule Pokemon.Pokemons.PokemonSchema do
+  @moduledoc """
+  This module defines the schema for Pokemons.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 
