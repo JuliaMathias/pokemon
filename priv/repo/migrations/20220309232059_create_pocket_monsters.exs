@@ -1,8 +1,8 @@
-defmodule Pokemon.Repo.Migrations.CreatePokemons do
+defmodule Pokemon.Repo.Migrations.CreatePocketMonsters do
   use Ecto.Migration
 
   def change do
-    create table(:pokemons, primary_key: false) do
+    create table(:pocket_monsters, primary_key: false) do
       add :id, :uuid, primary_key: true
       add :name, :string
       add :pokeapi_id, :string

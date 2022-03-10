@@ -1,12 +1,12 @@
-defmodule Pokemon.Pokemons.PokemonsTest do
+defmodule Pokemon.PocketMonsters.PocketMonstersTest do
   @moduledoc false
   use ExUnit.Case, async: true
 
   import Ecto.Query
   import Mox
 
-  alias Pokemon.Pokemons.Pokemons
-  alias Pokemon.Pokemons.PokemonSchema
+  alias Pokemon.PocketMonsters.PocketMonsters
+  alias Pokemon.PocketMonsters.PocketMonster
   alias Pokemon.Repo
 
   setup :verify_on_exit!
@@ -20,7 +20,7 @@ defmodule Pokemon.Pokemons.PokemonsTest do
       id = "8"
       name = "wartortle"
 
-      Repo.insert(%PokemonSchema{
+      Repo.insert(%PocketMonster{
         pokeapi_id: id,
         name: name,
         response: %{"name" => name, "id" => 8}
@@ -30,11 +30,11 @@ defmodule Pokemon.Pokemons.PokemonsTest do
     end
 
     test "gets name of a pokemon when given an id", %{id: id, name: name} do
-      assert Pokemons.get_name_by_id(id) == name
+      assert PocketMonsters.get_name_by_id(id) == name
     end
 
     test "gets id of a pokemon when given a name", %{id: id, name: name} do
-      assert Pokemons.get_id_by_name(name) == id
+      assert PocketMonsters.get_id_by_name(name) == id
     end
   end
 
@@ -46,9 +46,9 @@ defmodule Pokemon.Pokemons.PokemonsTest do
 
       expect(PokeApiBehaviourMock, :get_by_id, fn _id -> {:ok, response} end)
 
-      assert Pokemons.get_name_by_id(id) == name
+      assert PocketMonsters.get_name_by_id(id) == name
 
-      pokemon = Repo.one(from p in PokemonSchema, where: p.pokeapi_id == ^id)
+      pokemon = Repo.one(from p in PocketMonster, where: p.pokeapi_id == ^id)
 
       assert pokemon.pokeapi_id == id
       assert pokemon.name == name
@@ -62,9 +62,9 @@ defmodule Pokemon.Pokemons.PokemonsTest do
 
       expect(PokeApiBehaviourMock, :get_by_name, fn _name -> {:ok, response} end)
 
-      assert Pokemons.get_id_by_name(name) == id
+      assert PocketMonsters.get_id_by_name(name) == id
 
-      pokemon = Repo.one(from p in PokemonSchema, where: p.name == ^name)
+      pokemon = Repo.one(from p in PocketMonster, where: p.name == ^name)
 
       assert pokemon.pokeapi_id == id
       assert pokemon.name == name
@@ -75,22 +75,22 @@ defmodule Pokemon.Pokemons.PokemonsTest do
   test "when id is given and the pokemon is not found return {:error, :not_found}" do
     expect(PokeApiBehaviourMock, :get_by_id, fn _id -> {:error, :not_found} end)
 
-    assert Pokemons.get_name_by_id("9999999") == {:error, :not_found}
+    assert PocketMonsters.get_name_by_id("9999999") == {:error, :not_found}
   end
 
   test "when name is given and the pokemon is not found return {:error, :not_found}" do
     expect(PokeApiBehaviourMock, :get_by_name, fn _name -> {:error, :not_found} end)
 
-    assert Pokemons.get_id_by_name("julia") == {:error, :not_found}
+    assert PocketMonsters.get_id_by_name("julia") == {:error, :not_found}
   end
 
   test "if api is unavailable should return {:error, :unexpected}" do
     expect(PokeApiBehaviourMock, :get_by_id, fn _id -> {:error, :unexpected} end)
 
-    assert Pokemons.get_name_by_id("132") == {:error, :unexpected}
+    assert PocketMonsters.get_name_by_id("132") == {:error, :unexpected}
 
     expect(PokeApiBehaviourMock, :get_by_name, fn _name -> {:error, :unexpected} end)
 
-    assert Pokemons.get_id_by_name("ditto") == {:error, :unexpected}
+    assert PocketMonsters.get_id_by_name("ditto") == {:error, :unexpected}
   end
 end
