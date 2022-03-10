@@ -1,5 +1,7 @@
 # Pokemon
 
+&nbsp;
+
 ## Running the Project
 
   1. Install dependencies
@@ -28,9 +30,13 @@
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+&nbsp;
+
 ## Making API requests
 
 After the project is running, you can make API request to the available endpoints. At the moment we have the following endpoints:
+
+&nbsp;
 
 ### get name
 
@@ -48,6 +54,8 @@ Example:
   {"data":{"name":"ditto"}}%
   ```
 
+&nbsp;
+
 ### get pokeapi_id
 
 Using this endpoint you can get the id of a pokemon in the Poke api by its name.
@@ -63,6 +71,8 @@ Example:
 
  {"data":{"pokeapi_id":"132"}}%
   ```
+
+&nbsp;
 
 ## Running tests
 
