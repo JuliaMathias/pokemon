@@ -24,6 +24,7 @@ defmodule PokemonWeb.Router do
     pipe_through :api
 
     get "/name/:pokeapi_id", PocketMonsterController, :name
+    get "/pokeapi_id/:name", PocketMonsterController, :pokeapi_id
   end
 
   # Enables LiveDashboard only for development
