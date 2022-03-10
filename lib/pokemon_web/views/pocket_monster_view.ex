@@ -2,8 +2,8 @@ defmodule PokemonWeb.PocketMonsterView do
   use PokemonWeb, :view
   alias PokemonWeb.PocketMonsterView
 
-  def render("index.json", %{pocket_monsters: pocket_monsters}) do
-    %{data: render_many(pocket_monsters, PocketMonsterView, "pocket_monster.json")}
+  def render("name.json", %{pocket_monster_name: pocket_monster_name}) do
+    %{data: %{name: pocket_monster_name}}
   end
 
   def render("show.json", %{pocket_monster: pocket_monster}) do
