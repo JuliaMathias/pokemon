@@ -1,4 +1,4 @@
-defmodule Pokemon.Pokemons.Pokemon do
+defmodule Pokemon.Pokemons.PokemonSchema do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -10,7 +10,7 @@ defmodule Pokemon.Pokemons.Pokemon do
 
   schema "pokemons" do
     field :name, :string
-    field :pokeapi_id, :integer
+    field :pokeapi_id, :string
     field :response, :map
 
     timestamps()
