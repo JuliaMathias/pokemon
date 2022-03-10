@@ -1,6 +1,6 @@
 defmodule Pokemon.PocketMonsters do
   @moduledoc """
-  Functions that deal with our lovely PocketMonsters
+  This is the PocketMonsters context. It is used to house functions that both ping the Poke API and interact with the Repo.
   """
 
   import Ecto.Query
@@ -8,7 +8,11 @@ defmodule Pokemon.PocketMonsters do
   alias Pokemon.PocketMonsters.PocketMonster
   alias Pokemon.Repo
 
-  @spec get_name_by_id(id :: String.t()) :: String.t() | {:error, atom}
+  @doc """
+  This function returns a name when given the pokemon's id in the Poke API. If the pokemon is already cached in the database, no request is made.
+  """
+  @spec get_name_by_id(id :: String.t()) ::
+          String.t() | {:error, atom | Ecto.Changeset.t()}
   def get_name_by_id(id) do
     with nil <- Repo.one(from p in PocketMonster, where: p.pokeapi_id == ^id),
          {:ok, pokemon} <- impl().get_by_id(id),
@@ -20,7 +24,11 @@ defmodule Pokemon.PocketMonsters do
     end
   end
 
-  @spec get_id_by_name(name :: String.t()) :: String.t() | {:error, atom}
+  @doc """
+  This function returns the pokemon's id in the Poke API when given a name. If the pokemon is already cached in the database, no request is made.
+  """
+  @spec get_id_by_name(name :: String.t()) ::
+          String.t() | {:error, atom | Ecto.Changeset.t()}
   def get_id_by_name(name) do
     with nil <- Repo.one(from p in PocketMonster, where: p.name == ^name),
          {:ok, pokemon} <- impl().get_by_name(name),
@@ -33,7 +41,12 @@ defmodule Pokemon.PocketMonsters do
   end
 
   defp save_pokemon(%{"name" => name, "id" => id} = pokemon) do
-    Repo.insert(%PocketMonster{pokeapi_id: Integer.to_string(id), name: name, response: pokemon})
+    PocketMonster.changeset(%PocketMonster{}, %{
+      pokeapi_id: Integer.to_string(id),
+      name: name,
+      response: pokemon
+    })
+    |> Repo.insert()
   end
 
   defp impl, do: Application.get_env(:pokemon, __MODULE__, Pokemon.PokeApi.Client)
