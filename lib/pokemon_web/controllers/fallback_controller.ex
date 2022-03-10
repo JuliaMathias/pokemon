@@ -13,4 +13,11 @@ defmodule PokemonWeb.FallbackController do
     |> put_view(PokemonWeb.ErrorView)
     |> render(:"404")
   end
+
+  def call(conn, {:error, :unexpected}) do
+    conn
+    |> put_status(:internal_server_error)
+    |> put_view(PokemonWeb.ErrorView)
+    |> render(:"500")
+  end
 end
