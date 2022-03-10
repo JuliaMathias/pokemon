@@ -1,6 +1,6 @@
-defmodule Pokemon.Pokemons.PokemonSchema do
+defmodule Pokemon.PocketMonsters.PocketMonster do
   @moduledoc """
-  This module defines the schema for Pokemons.
+  This module defines the schema for PocketMonsters.
   """
   use Ecto.Schema
   import Ecto.Changeset
@@ -11,7 +11,7 @@ defmodule Pokemon.Pokemons.PokemonSchema do
 
   @derive {Jason.Encoder, except: [:__meta__]}
 
-  schema "pokemons" do
+  schema "pocket_monsters" do
     field :name, :string
     field :pokeapi_id, :string
     field :response, :map
