@@ -1,11 +1,11 @@
-defmodule Pokemon.PocketMonsters.PocketMonstersTest do
+defmodule Pokemon.PocketMonstersTest do
   @moduledoc false
   use ExUnit.Case, async: true
 
   import Ecto.Query
   import Mox
 
-  alias Pokemon.PocketMonsters.PocketMonsters
+  alias Pokemon.PocketMonsters
   alias Pokemon.PocketMonsters.PocketMonster
   alias Pokemon.Repo
 

@@ -1,4 +1,4 @@
-defmodule Pokemon.PocketMonsters.PocketMonsters do
+defmodule Pokemon.PocketMonsters do
   @moduledoc """
   Functions that deal with our lovely PocketMonsters
   """
