@@ -3,8 +3,9 @@ defmodule Pokemon.PocketMonstersTest do
   use ExUnit.Case, async: true
 
   import Ecto.Query
-  import Mox
+  import Hammox
 
+  alias Ecto.Adapters.SQL.Sandbox
   alias Pokemon.PocketMonsters
   alias Pokemon.PocketMonsters.PocketMonster
   alias Pokemon.Repo
@@ -12,7 +13,7 @@ defmodule Pokemon.PocketMonstersTest do
   setup :verify_on_exit!
 
   setup do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Repo)
+    :ok = Sandbox.checkout(Repo)
   end
 
   describe "using the database" do
@@ -44,7 +45,7 @@ defmodule Pokemon.PocketMonstersTest do
       name = "ditto"
       response = %{"name" => name, "id" => 132}
 
-      expect(PokeApiBehaviourMock, :get_by_id, fn _id -> {:ok, response} end)
+      expect(PokeApiBehaviourMock, :get_by_id, fn ^id -> {:ok, response} end)
 
       assert PocketMonsters.get_name_by_id(id) == name
 
@@ -60,7 +61,7 @@ defmodule Pokemon.PocketMonstersTest do
       name = "beedrill"
       response = %{"name" => name, "id" => 15}
 
-      expect(PokeApiBehaviourMock, :get_by_name, fn _name -> {:ok, response} end)
+      expect(PokeApiBehaviourMock, :get_by_name, fn ^name -> {:ok, response} end)
 
       assert PocketMonsters.get_id_by_name(name) == id
 
@@ -73,24 +74,31 @@ defmodule Pokemon.PocketMonstersTest do
   end
 
   test "when id is given and the pokemon is not found return {:error, :not_found}" do
-    expect(PokeApiBehaviourMock, :get_by_id, fn _id -> {:error, :not_found} end)
+    id = "9999999"
 
-    assert PocketMonsters.get_name_by_id("9999999") == {:error, :not_found}
+    expect(PokeApiBehaviourMock, :get_by_id, fn ^id -> {:error, :not_found} end)
+
+    assert PocketMonsters.get_name_by_id(id) == {:error, :not_found}
   end
 
   test "when name is given and the pokemon is not found return {:error, :not_found}" do
-    expect(PokeApiBehaviourMock, :get_by_name, fn _name -> {:error, :not_found} end)
+    name = "julia"
 
-    assert PocketMonsters.get_id_by_name("julia") == {:error, :not_found}
+    expect(PokeApiBehaviourMock, :get_by_name, fn ^name -> {:error, :not_found} end)
+
+    assert PocketMonsters.get_id_by_name(name) == {:error, :not_found}
   end
 
   test "if api is unavailable should return {:error, :unexpected}" do
-    expect(PokeApiBehaviourMock, :get_by_id, fn _id -> {:error, :unexpected} end)
+    id = "132"
+    name = "ditto"
 
-    assert PocketMonsters.get_name_by_id("132") == {:error, :unexpected}
+    expect(PokeApiBehaviourMock, :get_by_id, fn ^id -> {:error, :unexpected} end)
 
-    expect(PokeApiBehaviourMock, :get_by_name, fn _name -> {:error, :unexpected} end)
+    assert PocketMonsters.get_name_by_id(id) == {:error, :unexpected}
 
-    assert PocketMonsters.get_id_by_name("ditto") == {:error, :unexpected}
+    expect(PokeApiBehaviourMock, :get_by_name, fn ^name -> {:error, :unexpected} end)
+
+    assert PocketMonsters.get_id_by_name(name) == {:error, :unexpected}
   end
 end

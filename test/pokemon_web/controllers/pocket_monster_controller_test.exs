@@ -1,8 +1,8 @@
 defmodule PokemonWeb.PocketMonsterControllerTest do
   @moduledoc false
-  use PokemonWeb.ConnCase
+  use PokemonWeb.ConnCase, async: true
 
-  import Mox
+  import Hammox
 
   @pokeapi_id "132"
   @name "ditto"

@@ -66,7 +66,7 @@ defmodule Pokemon.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
-      {:mox, "~> 1.0", only: :test}
+      {:hammox, "~> 0.5", only: :test}
     ]
   end
 
